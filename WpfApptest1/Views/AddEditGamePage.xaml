@@ -1,0 +1,80 @@
+﻿<Page x:Class="WpfApptest1.Views.AddEditGamePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfApptest1.Views"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="AddEditGamePage">
+    <Page.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="Aqua"/>
+            <Setter Property="Margin" Value="1 0 1 0"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="BorderThickness" Value="0.5"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="10"
+                                Background="Aqua"
+                                Height="auto"
+                                Width="auto"
+                                BorderThickness="1"
+                                BorderBrush="Black">
+                            <ContentPresenter Content="{TemplateBinding Content}"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Foreground" Value="White"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
+    <Grid Background="White">
+        <StackPanel VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Orientation="Vertical"
+                    MinWidth="300">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="выбрать jpg:" Height="20"/>
+                <ComboBox SelectedItem="{Binding id_sourse_image_preview.Image_sourse}"
+                      DisplayMemberPath="name_image"
+                      x:Name="CmbBoxImageSourse"
+                      MinWidth="200"
+                      Height="30"
+                      Margin="10"
+                      SelectionChanged="CmbBoxImageSourse_SelectionChanged"/>
+                <Image Height="70"
+                       Width="70"
+                       x:Name="ImageSelected">
+
+                </Image>
+            </StackPanel>
+            <TextBlock Text="Имя игры"/>
+            <TextBox x:Name="TxtBxNameGame" MaxLength="50" Text="{Binding Name}"/>
+            <TextBlock Text="Дата выпуска"/>
+            <DatePicker x:Name="DataPickCreateGame"
+                        SelectedDate="{Binding Publication_date}"/>
+            <TextBlock Text="Платформа"/>
+            <ComboBox SelectedItem="{Binding Platform_id.id_Platform}"
+                      DisplayMemberPath="Name_platform"
+                      x:Name="CmbBoxPlatform"/>
+            <TextBlock Text="Жанр"/>
+            <ComboBox SelectedItem="{Binding Genres_id.id_Genre}"
+                      DisplayMemberPath="Name_ganre"
+                      x:Name="CmbBoxGenres"/>
+            <TextBlock Text="Издатель"/>
+            <ComboBox SelectedItem="{Binding Developer_id.id_Developer}"
+                      DisplayMemberPath="Name_developer"
+                      x:Name="CmbBoxDeveloper"/>
+            <Button Content="Сохранить" x:Name="BtnSaveGame" Margin="0 10" Click="BtnSaveGame_Click"/>
+        </StackPanel>
+    </Grid>
+</Page>

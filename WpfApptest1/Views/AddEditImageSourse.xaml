@@ -1,0 +1,72 @@
+﻿<Page x:Class="WpfApptest1.Views.AddEditImageSourse"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfApptest1.Views"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="AddEditImageSourse"
+      xmlns:gif="http://wpfanimatedgif.codeplex.com">
+    <Page.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="Aqua"/>
+            <Setter Property="Margin" Value="1 0 1 0"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="BorderThickness" Value="0.5"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="10"
+                                Background="Aqua"
+                                Height="auto"
+                                Width="auto"
+                                BorderThickness="1"
+                                BorderBrush="Black">
+                            <ContentPresenter Content="{TemplateBinding Content}"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Foreground" Value="White"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
+    <Grid Background="White">
+        <StackPanel Orientation="Vertical"
+                    MinWidth="500"
+                    MinHeight="130"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    x:Name="StackPanelSourse">
+            <StackPanel Orientation="Horizontal"
+                        MinWidth="200">
+                <TextBlock Text="Имя: "/>
+                <TextBox Text="{Binding name_image}" MaxLength="50" TextWrapping="Wrap" AcceptsReturn="False" MinWidth="350" x:Name="TxtBoxImageName"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal"
+                        Margin="0 15">
+                <TextBlock Text="Путь до превью: "/>
+                <TextBox MaxLength="999" TextWrapping="Wrap" AcceptsReturn="False" x:Name="TxtBoxPath" MinWidth="286"/>
+                <Button x:Name="BtnTest" Click="BtnTest_Click" Content="Выбрать" Margin="5 0"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center"
+                        x:Name="StackPanelImageAndButt">
+                <Image Width="70"
+                       Height="70"
+                       x:Name="ImageStackPanel"
+                       Source="{Binding Image_sourse}"
+                       Stretch="Uniform"
+                       gif:ImageBehavior.AnimatedSource="{Binding AnimatedGif}"/>
+                <Button x:Name="AddImageBinary" Content="Добавить в базу" Height="25" Width="100" Margin="15" Click="AddImageBinary_Click"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Page>

@@ -1,0 +1,728 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище asd1234Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Comments">
+          <Key>
+            <PropertyRef Name="id_Comment" />
+          </Key>
+          <Property Name="id_Comment" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_Game" Type="int" Nullable="false" />
+          <Property Name="id_User" Type="int" Nullable="false" />
+          <Property Name="Date_comment" Type="date" Nullable="false" />
+          <Property Name="Comment_text" Type="varchar" MaxLength="512" />
+          <Property Name="Rating_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Developer_id">
+          <Key>
+            <PropertyRef Name="id_Developer" />
+          </Key>
+          <Property Name="id_Developer" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name_developer" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Games">
+          <Key>
+            <PropertyRef Name="id_Game" />
+          </Key>
+          <Property Name="id_Game" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Publication_date" Type="date" Nullable="false" />
+          <Property Name="id_Platform" Type="int" Nullable="false" />
+          <Property Name="id_Genre" Type="int" Nullable="false" />
+          <Property Name="id_Developer" Type="int" Nullable="false" />
+          <Property Name="id_Image_preview" Type="int" Nullable="false" />
+          <Property Name="Rating_average" Type="int" />
+        </EntityType>
+        <EntityType Name="Genres_id">
+          <Key>
+            <PropertyRef Name="id_Genre" />
+          </Key>
+          <Property Name="id_Genre" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name_ganre" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="id_sourse_image_preview">
+          <Key>
+            <PropertyRef Name="id_Sourse" />
+          </Key>
+          <Property Name="id_Sourse" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Image_sourse" Type="varbinary(max)" Nullable="false" />
+          <Property Name="name_image" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Platform_id">
+          <Key>
+            <PropertyRef Name="id_Platform" />
+          </Key>
+          <Property Name="id_Platform" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name_platform" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Rating_Values">
+          <Key>
+            <PropertyRef Name="id_Rating" />
+          </Key>
+          <Property Name="id_Rating" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Rating" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Role_id">
+          <Key>
+            <PropertyRef Name="id_Role" />
+          </Key>
+          <Property Name="id_Role" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Role_type" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Role_access" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sex_id">
+          <Key>
+            <PropertyRef Name="id_Sex" />
+          </Key>
+          <Property Name="id_Sex" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Sex" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="id_User" />
+          </Key>
+          <Property Name="id_User" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Login" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="id_Role" Type="int" Nullable="false" />
+          <Property Name="DOB" Type="date" Nullable="false" />
+          <Property Name="id_Sex" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Familiya" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Otchestvo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Registration_date" Type="date" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__users__рольId__4D5F7D71">
+          <End Role="Role_id" Type="Self.Role_id" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role_id">
+              <PropertyRef Name="id_Role" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="id_Role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CASCADE_UPDATE_id_Game">
+          <End Role="Games" Type="Self.Games" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Games">
+              <PropertyRef Name="id_Game" />
+            </Principal>
+            <Dependent Role="Comments">
+              <PropertyRef Name="id_Game" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CASCADE_UPDATE_id_user">
+          <End Role="Users" Type="Self.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id_User" />
+            </Principal>
+            <Dependent Role="Comments">
+              <PropertyRef Name="id_User" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comments_Games">
+          <End Role="Games" Type="Self.Games" Multiplicity="1" />
+          <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Games">
+              <PropertyRef Name="id_Game" />
+            </Principal>
+            <Dependent Role="Comments">
+              <PropertyRef Name="id_Game" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comments_Rating_Values">
+          <End Role="Rating_Values" Type="Self.Rating_Values" Multiplicity="1" />
+          <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rating_Values">
+              <PropertyRef Name="id_Rating" />
+            </Principal>
+            <Dependent Role="Comments">
+              <PropertyRef Name="Rating_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comments_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id_User" />
+            </Principal>
+            <Dependent Role="Comments">
+              <PropertyRef Name="id_User" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_games_developerId1">
+          <End Role="Developer_id" Type="Self.Developer_id" Multiplicity="1" />
+          <End Role="Games" Type="Self.Games" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Developer_id">
+              <PropertyRef Name="id_Developer" />
+            </Principal>
+            <Dependent Role="Games">
+              <PropertyRef Name="id_Developer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_games_genresId1">
+          <End Role="Genres_id" Type="Self.Genres_id" Multiplicity="1" />
+          <End Role="Games" Type="Self.Games" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genres_id">
+              <PropertyRef Name="id_Genre" />
+            </Principal>
+            <Dependent Role="Games">
+              <PropertyRef Name="id_Platform" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Games_id_sourse_immage_preview">
+          <End Role="id_sourse_image_preview" Type="Self.id_sourse_image_preview" Multiplicity="1" />
+          <End Role="Games" Type="Self.Games" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="id_sourse_image_preview">
+              <PropertyRef Name="id_Sourse" />
+            </Principal>
+            <Dependent Role="Games">
+              <PropertyRef Name="id_Image_preview" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_games_platformId1">
+          <End Role="Platform_id" Type="Self.Platform_id" Multiplicity="1" />
+          <End Role="Games" Type="Self.Games" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Platform_id">
+              <PropertyRef Name="id_Platform" />
+            </Principal>
+            <Dependent Role="Games">
+              <PropertyRef Name="id_Platform" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_users_sexId">
+          <End Role="Sex_id" Type="Self.Sex_id" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sex_id">
+              <PropertyRef Name="id_Sex" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="id_Sex" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище asd1234ModelContainer">
+          <EntitySet Name="Comments" EntityType="Self.Comments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Developer_id" EntityType="Self.Developer_id" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Games" EntityType="Self.Games" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Genres_id" EntityType="Self.Genres_id" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="id_sourse_image_preview" EntityType="Self.id_sourse_image_preview" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Platform_id" EntityType="Self.Platform_id" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rating_Values" EntityType="Self.Rating_Values" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role_id" EntityType="Self.Role_id" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sex_id" EntityType="Self.Sex_id" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__users__рольId__4D5F7D71" Association="Self.FK__users__рольId__4D5F7D71">
+            <End Role="Role_id" EntitySet="Role_id" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CASCADE_UPDATE_id_Game" Association="Self.FK_CASCADE_UPDATE_id_Game">
+            <End Role="Games" EntitySet="Games" />
+            <End Role="Comments" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CASCADE_UPDATE_id_user" Association="Self.FK_CASCADE_UPDATE_id_user">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Comments" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comments_Games" Association="Self.FK_Comments_Games">
+            <End Role="Games" EntitySet="Games" />
+            <End Role="Comments" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comments_Rating_Values" Association="Self.FK_Comments_Rating_Values">
+            <End Role="Rating_Values" EntitySet="Rating_Values" />
+            <End Role="Comments" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comments_Users" Association="Self.FK_Comments_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Comments" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_games_developerId1" Association="Self.FK_games_developerId1">
+            <End Role="Developer_id" EntitySet="Developer_id" />
+            <End Role="Games" EntitySet="Games" />
+          </AssociationSet>
+          <AssociationSet Name="FK_games_genresId1" Association="Self.FK_games_genresId1">
+            <End Role="Genres_id" EntitySet="Genres_id" />
+            <End Role="Games" EntitySet="Games" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Games_id_sourse_immage_preview" Association="Self.FK_Games_id_sourse_immage_preview">
+            <End Role="id_sourse_image_preview" EntitySet="id_sourse_image_preview" />
+            <End Role="Games" EntitySet="Games" />
+          </AssociationSet>
+          <AssociationSet Name="FK_games_platformId1" Association="Self.FK_games_platformId1">
+            <End Role="Platform_id" EntitySet="Platform_id" />
+            <End Role="Games" EntitySet="Games" />
+          </AssociationSet>
+          <AssociationSet Name="FK_users_sexId" Association="Self.FK_users_sexId">
+            <End Role="Sex_id" EntitySet="Sex_id" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="asd1234Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Comments">
+          <Key>
+            <PropertyRef Name="id_Comment" />
+          </Key>
+          <Property Name="id_Comment" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_Game" Type="Int32" Nullable="false" />
+          <Property Name="id_User" Type="Int32" Nullable="false" />
+          <Property Name="Date_comment" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Comment_text" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="Rating_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Games" Relationship="Self.FK_CASCADE_UPDATE_id_Game" FromRole="Comments" ToRole="Games" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_CASCADE_UPDATE_id_user" FromRole="Comments" ToRole="Users" />
+          <NavigationProperty Name="Games1" Relationship="Self.FK_Comments_Games" FromRole="Comments" ToRole="Games" />
+          <NavigationProperty Name="Rating_Values" Relationship="Self.FK_Comments_Rating_Values" FromRole="Comments" ToRole="Rating_Values" />
+          <NavigationProperty Name="Users1" Relationship="Self.FK_Comments_Users" FromRole="Comments" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Developer_id">
+          <Key>
+            <PropertyRef Name="id_Developer" />
+          </Key>
+          <Property Name="id_Developer" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name_developer" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Games" Relationship="Self.FK_games_developerId1" FromRole="Developer_id" ToRole="Games" />
+        </EntityType>
+        <EntityType Name="Games">
+          <Key>
+            <PropertyRef Name="id_Game" />
+          </Key>
+          <Property Name="id_Game" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Publication_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="id_Platform" Type="Int32" Nullable="false" />
+          <Property Name="id_Genre" Type="Int32" Nullable="false" />
+          <Property Name="id_Developer" Type="Int32" Nullable="false" />
+          <Property Name="id_Image_preview" Type="Int32" Nullable="false" />
+          <Property Name="Rating_average" Type="Int32" />
+          <NavigationProperty Name="Comments" Relationship="Self.FK_CASCADE_UPDATE_id_Game" FromRole="Games" ToRole="Comments" />
+          <NavigationProperty Name="Comments1" Relationship="Self.FK_Comments_Games" FromRole="Games" ToRole="Comments" />
+          <NavigationProperty Name="Developer_id" Relationship="Self.FK_games_developerId1" FromRole="Games" ToRole="Developer_id" />
+          <NavigationProperty Name="Genres_id" Relationship="Self.FK_games_genresId1" FromRole="Games" ToRole="Genres_id" />
+          <NavigationProperty Name="id_sourse_image_preview" Relationship="Self.FK_Games_id_sourse_immage_preview" FromRole="Games" ToRole="id_sourse_image_preview" />
+          <NavigationProperty Name="Platform_id" Relationship="Self.FK_games_platformId1" FromRole="Games" ToRole="Platform_id" />
+        </EntityType>
+        <EntityType Name="Genres_id">
+          <Key>
+            <PropertyRef Name="id_Genre" />
+          </Key>
+          <Property Name="id_Genre" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name_ganre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Games" Relationship="Self.FK_games_genresId1" FromRole="Genres_id" ToRole="Games" />
+        </EntityType>
+        <EntityType Name="id_sourse_image_preview">
+          <Key>
+            <PropertyRef Name="id_Sourse" />
+          </Key>
+          <Property Name="id_Sourse" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Image_sourse" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="name_image" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Games" Relationship="Self.FK_Games_id_sourse_immage_preview" FromRole="id_sourse_image_preview" ToRole="Games" />
+        </EntityType>
+        <EntityType Name="Platform_id">
+          <Key>
+            <PropertyRef Name="id_Platform" />
+          </Key>
+          <Property Name="id_Platform" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name_platform" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Games" Relationship="Self.FK_games_platformId1" FromRole="Platform_id" ToRole="Games" />
+        </EntityType>
+        <EntityType Name="Rating_Values">
+          <Key>
+            <PropertyRef Name="id_Rating" />
+          </Key>
+          <Property Name="id_Rating" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Rating" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Comments" Relationship="Self.FK_Comments_Rating_Values" FromRole="Rating_Values" ToRole="Comments" />
+        </EntityType>
+        <EntityType Name="Role_id">
+          <Key>
+            <PropertyRef Name="id_Role" />
+          </Key>
+          <Property Name="id_Role" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Role_type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Role_access" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="Self.FK__users__рольId__4D5F7D71" FromRole="Role_id" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Sex_id">
+          <Key>
+            <PropertyRef Name="id_Sex" />
+          </Key>
+          <Property Name="id_Sex" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Sex" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_users_sexId" FromRole="Sex_id" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="id_User" />
+          </Key>
+          <Property Name="id_User" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="id_Role" Type="Int32" Nullable="false" />
+          <Property Name="DOB" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="id_Sex" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Familiya" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Otchestvo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Registration_date" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Comments" Relationship="Self.FK_CASCADE_UPDATE_id_user" FromRole="Users" ToRole="Comments" />
+          <NavigationProperty Name="Comments1" Relationship="Self.FK_Comments_Users" FromRole="Users" ToRole="Comments" />
+          <NavigationProperty Name="Role_id" Relationship="Self.FK__users__рольId__4D5F7D71" FromRole="Users" ToRole="Role_id" />
+          <NavigationProperty Name="Sex_id" Relationship="Self.FK_users_sexId" FromRole="Users" ToRole="Sex_id" />
+        </EntityType>
+        <Association Name="FK_CASCADE_UPDATE_id_Game">
+          <End Role="Games" Type="Self.Games" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Games">
+              <PropertyRef Name="id_Game" />
+            </Principal>
+            <Dependent Role="Comments">
+              <PropertyRef Name="id_Game" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CASCADE_UPDATE_id_user">
+          <End Role="Users" Type="Self.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id_User" />
+            </Principal>
+            <Dependent Role="Comments">
+              <PropertyRef Name="id_User" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comments_Games">
+          <End Role="Games" Type="Self.Games" Multiplicity="1" />
+          <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Games">
+              <PropertyRef Name="id_Game" />
+            </Principal>
+            <Dependent Role="Comments">
+              <PropertyRef Name="id_Game" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comments_Rating_Values">
+          <End Role="Rating_Values" Type="Self.Rating_Values" Multiplicity="1" />
+          <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rating_Values">
+              <PropertyRef Name="id_Rating" />
+            </Principal>
+            <Dependent Role="Comments">
+              <PropertyRef Name="Rating_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comments_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id_User" />
+            </Principal>
+            <Dependent Role="Comments">
+              <PropertyRef Name="id_User" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_games_developerId1">
+          <End Role="Developer_id" Type="Self.Developer_id" Multiplicity="1" />
+          <End Role="Games" Type="Self.Games" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Developer_id">
+              <PropertyRef Name="id_Developer" />
+            </Principal>
+            <Dependent Role="Games">
+              <PropertyRef Name="id_Developer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_games_genresId1">
+          <End Role="Genres_id" Type="Self.Genres_id" Multiplicity="1" />
+          <End Role="Games" Type="Self.Games" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genres_id">
+              <PropertyRef Name="id_Genre" />
+            </Principal>
+            <Dependent Role="Games">
+              <PropertyRef Name="id_Platform" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Games_id_sourse_immage_preview">
+          <End Role="id_sourse_image_preview" Type="Self.id_sourse_image_preview" Multiplicity="1" />
+          <End Role="Games" Type="Self.Games" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="id_sourse_image_preview">
+              <PropertyRef Name="id_Sourse" />
+            </Principal>
+            <Dependent Role="Games">
+              <PropertyRef Name="id_Image_preview" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_games_platformId1">
+          <End Role="Platform_id" Type="Self.Platform_id" Multiplicity="1" />
+          <End Role="Games" Type="Self.Games" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Platform_id">
+              <PropertyRef Name="id_Platform" />
+            </Principal>
+            <Dependent Role="Games">
+              <PropertyRef Name="id_Platform" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__users__рольId__4D5F7D71">
+          <End Role="Role_id" Type="Self.Role_id" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role_id">
+              <PropertyRef Name="id_Role" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="id_Role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_users_sexId">
+          <End Role="Sex_id" Type="Self.Sex_id" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sex_id">
+              <PropertyRef Name="id_Sex" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="id_Sex" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="asd1234Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Comments" EntityType="Self.Comments" />
+          <EntitySet Name="Developer_id" EntityType="Self.Developer_id" />
+          <EntitySet Name="Games" EntityType="Self.Games" />
+          <EntitySet Name="Genres_id" EntityType="Self.Genres_id" />
+          <EntitySet Name="id_sourse_image_preview" EntityType="Self.id_sourse_image_preview" />
+          <EntitySet Name="Platform_id" EntityType="Self.Platform_id" />
+          <EntitySet Name="Rating_Values" EntityType="Self.Rating_Values" />
+          <EntitySet Name="Role_id" EntityType="Self.Role_id" />
+          <EntitySet Name="Sex_id" EntityType="Self.Sex_id" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <AssociationSet Name="FK_CASCADE_UPDATE_id_Game" Association="Self.FK_CASCADE_UPDATE_id_Game">
+            <End Role="Games" EntitySet="Games" />
+            <End Role="Comments" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CASCADE_UPDATE_id_user" Association="Self.FK_CASCADE_UPDATE_id_user">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Comments" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comments_Games" Association="Self.FK_Comments_Games">
+            <End Role="Games" EntitySet="Games" />
+            <End Role="Comments" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comments_Rating_Values" Association="Self.FK_Comments_Rating_Values">
+            <End Role="Rating_Values" EntitySet="Rating_Values" />
+            <End Role="Comments" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comments_Users" Association="Self.FK_Comments_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Comments" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_games_developerId1" Association="Self.FK_games_developerId1">
+            <End Role="Developer_id" EntitySet="Developer_id" />
+            <End Role="Games" EntitySet="Games" />
+          </AssociationSet>
+          <AssociationSet Name="FK_games_genresId1" Association="Self.FK_games_genresId1">
+            <End Role="Genres_id" EntitySet="Genres_id" />
+            <End Role="Games" EntitySet="Games" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Games_id_sourse_immage_preview" Association="Self.FK_Games_id_sourse_immage_preview">
+            <End Role="id_sourse_image_preview" EntitySet="id_sourse_image_preview" />
+            <End Role="Games" EntitySet="Games" />
+          </AssociationSet>
+          <AssociationSet Name="FK_games_platformId1" Association="Self.FK_games_platformId1">
+            <End Role="Platform_id" EntitySet="Platform_id" />
+            <End Role="Games" EntitySet="Games" />
+          </AssociationSet>
+          <AssociationSet Name="FK__users__рольId__4D5F7D71" Association="Self.FK__users__рольId__4D5F7D71">
+            <End Role="Role_id" EntitySet="Role_id" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_users_sexId" Association="Self.FK_users_sexId">
+            <End Role="Sex_id" EntitySet="Sex_id" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище asd1234ModelContainer" CdmEntityContainer="asd1234Entities">
+          <EntitySetMapping Name="Comments">
+            <EntityTypeMapping TypeName="asd1234Model.Comments">
+              <MappingFragment StoreEntitySet="Comments">
+                <ScalarProperty Name="id_Comment" ColumnName="id_Comment" />
+                <ScalarProperty Name="id_Game" ColumnName="id_Game" />
+                <ScalarProperty Name="id_User" ColumnName="id_User" />
+                <ScalarProperty Name="Date_comment" ColumnName="Date_comment" />
+                <ScalarProperty Name="Comment_text" ColumnName="Comment_text" />
+                <ScalarProperty Name="Rating_id" ColumnName="Rating_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Developer_id">
+            <EntityTypeMapping TypeName="asd1234Model.Developer_id">
+              <MappingFragment StoreEntitySet="Developer_id">
+                <ScalarProperty Name="id_Developer" ColumnName="id_Developer" />
+                <ScalarProperty Name="Name_developer" ColumnName="Name_developer" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Games">
+            <EntityTypeMapping TypeName="asd1234Model.Games">
+              <MappingFragment StoreEntitySet="Games">
+                <ScalarProperty Name="id_Game" ColumnName="id_Game" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Publication_date" ColumnName="Publication_date" />
+                <ScalarProperty Name="id_Platform" ColumnName="id_Platform" />
+                <ScalarProperty Name="id_Genre" ColumnName="id_Genre" />
+                <ScalarProperty Name="id_Developer" ColumnName="id_Developer" />
+                <ScalarProperty Name="id_Image_preview" ColumnName="id_Image_preview" />
+                <ScalarProperty Name="Rating_average" ColumnName="Rating_average" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Genres_id">
+            <EntityTypeMapping TypeName="asd1234Model.Genres_id">
+              <MappingFragment StoreEntitySet="Genres_id">
+                <ScalarProperty Name="id_Genre" ColumnName="id_Genre" />
+                <ScalarProperty Name="Name_ganre" ColumnName="Name_ganre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="id_sourse_image_preview">
+            <EntityTypeMapping TypeName="asd1234Model.id_sourse_image_preview">
+              <MappingFragment StoreEntitySet="id_sourse_image_preview">
+                <ScalarProperty Name="id_Sourse" ColumnName="id_Sourse" />
+                <ScalarProperty Name="Image_sourse" ColumnName="Image_sourse" />
+                <ScalarProperty Name="name_image" ColumnName="name_image" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Platform_id">
+            <EntityTypeMapping TypeName="asd1234Model.Platform_id">
+              <MappingFragment StoreEntitySet="Platform_id">
+                <ScalarProperty Name="id_Platform" ColumnName="id_Platform" />
+                <ScalarProperty Name="Name_platform" ColumnName="Name_platform" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rating_Values">
+            <EntityTypeMapping TypeName="asd1234Model.Rating_Values">
+              <MappingFragment StoreEntitySet="Rating_Values">
+                <ScalarProperty Name="id_Rating" ColumnName="id_Rating" />
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Role_id">
+            <EntityTypeMapping TypeName="asd1234Model.Role_id">
+              <MappingFragment StoreEntitySet="Role_id">
+                <ScalarProperty Name="id_Role" ColumnName="id_Role" />
+                <ScalarProperty Name="Role_type" ColumnName="Role_type" />
+                <ScalarProperty Name="Role_access" ColumnName="Role_access" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sex_id">
+            <EntityTypeMapping TypeName="asd1234Model.Sex_id">
+              <MappingFragment StoreEntitySet="Sex_id">
+                <ScalarProperty Name="id_Sex" ColumnName="id_Sex" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="asd1234Model.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="id_User" ColumnName="id_User" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="id_Role" ColumnName="id_Role" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="id_Sex" ColumnName="id_Sex" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Familiya" ColumnName="Familiya" />
+                <ScalarProperty Name="Otchestvo" ColumnName="Otchestvo" />
+                <ScalarProperty Name="Registration_date" ColumnName="Registration_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

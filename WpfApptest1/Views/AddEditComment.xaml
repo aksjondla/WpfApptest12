@@ -1,0 +1,79 @@
+﻿<Page x:Class="WpfApptest1.Views.AddEditComment"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfApptest1.Views"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="AddEditComment">
+    <Page.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="Aqua"/>
+            <Setter Property="Margin" Value="1 0 1 0"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="BorderThickness" Value="0.5"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="10"
+                                Background="Aqua"
+                                Height="auto"
+                                Width="auto"
+                                BorderThickness="1"
+                                BorderBrush="Black">
+                            <ContentPresenter Content="{TemplateBinding Content}"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Foreground" Value="White"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
+    <Grid Background="White">
+        <StackPanel VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Orientation="Vertical"
+                    x:Name="StackPalenComment"
+                    MinWidth="200">
+            <TextBlock Text="Игра:"/>
+            <ComboBox ItemsSource="{Binding Games.id_Game}"
+                      DisplayMemberPath="Name"
+                      x:Name="CmbBoxGameName"/>
+            <TextBlock Text="Пользователь:"/>
+            <ComboBox x:Name="CmbBoxUserSelect"
+                      ItemsSource="{Binding Users}"
+                      >
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Familiya}" Margin="0 0 0 10"/>
+                            <TextBlock Text=" " />
+                            <TextBlock Text="{Binding Name}" Margin="0 0 0 10"/>
+                            <TextBlock Text=" " />
+                            <TextBlock Text="{Binding Otchestvo}" Margin="0 0 0 10"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <TextBlock Text="Дата создания коментария: " x:Name="TxtBlickDate"/>
+            <DatePicker SelectedDate="{Binding Date_comment}" x:Name="dateTimePicker"/>
+            <TextBlock Text="Рейтинг:"/>
+            <ComboBox ItemsSource="{Binding Rating_Values.id_Rating}"
+                      x:Name="CmbRating"
+                      DisplayMemberPath="Rating">
+                
+            </ComboBox>
+            <TextBlock Text="Текст коментария:"/>
+            <TextBox Text="{Binding Comment_text}" AcceptsReturn="False" TextWrapping="Wrap" MaxLength="512"/>
+            <Button Content="Сохранить" x:Name="BtnSaveComment" Click="BtnSaveComment_Click"/>
+        </StackPanel>
+    </Grid>
+</Page>

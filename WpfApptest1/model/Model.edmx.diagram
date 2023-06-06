@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="872a8799b7a84fbe8ee73a552821928f" Name="Diagram1">
+        <EntityTypeShape EntityType="asd1234Model.Comments" Width="1.5" PointX="5.25" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="asd1234Model.Developer_id" Width="1.5" PointX="0.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="asd1234Model.Games" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="asd1234Model.Genres_id" Width="1.5" PointX="0.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="asd1234Model.id_sourse_image_preview" Width="1.5" PointX="0.75" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="asd1234Model.Platform_id" Width="1.5" PointX="0.75" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="asd1234Model.Rating_Values" Width="1.5" PointX="3" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="asd1234Model.Role_id" Width="1.5" PointX="0.75" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="asd1234Model.Sex_id" Width="1.5" PointX="0.75" PointY="15.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="asd1234Model.Users" Width="1.5" PointX="3" PointY="12.75" IsExpanded="true" />
+        <AssociationConnector Association="asd1234Model.FK_CASCADE_UPDATE_id_Game" ManuallyRouted="false" />
+        <AssociationConnector Association="asd1234Model.FK_CASCADE_UPDATE_id_user" ManuallyRouted="false" />
+        <AssociationConnector Association="asd1234Model.FK_Comments_Games" ManuallyRouted="false" />
+        <AssociationConnector Association="asd1234Model.FK_Comments_Rating_Values" ManuallyRouted="false" />
+        <AssociationConnector Association="asd1234Model.FK_Comments_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="asd1234Model.FK_games_developerId1" ManuallyRouted="false" />
+        <AssociationConnector Association="asd1234Model.FK_games_genresId1" ManuallyRouted="false" />
+        <AssociationConnector Association="asd1234Model.FK_Games_id_sourse_immage_preview" ManuallyRouted="false" />
+        <AssociationConnector Association="asd1234Model.FK_games_platformId1" ManuallyRouted="false" />
+        <AssociationConnector Association="asd1234Model.FK__users__рольId__4D5F7D71" ManuallyRouted="false" />
+        <AssociationConnector Association="asd1234Model.FK_users_sexId" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

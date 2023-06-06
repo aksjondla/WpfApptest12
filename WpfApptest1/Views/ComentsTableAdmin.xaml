@@ -1,0 +1,90 @@
+﻿<Page x:Class="WpfApptest1.Views.ComentsTableAdmin"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfApptest1.Views"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ComentsTableAdmin"
+      Loaded="Page_Loaded">
+    <Page.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="Aqua"/>
+            <Setter Property="Margin" Value="1 0 1 0"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="BorderThickness" Value="0.5"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="10"
+                                Background="Aqua"
+                                Height="auto"
+                                Width="auto"
+                                BorderThickness="1"
+                                BorderBrush="Black">
+                            <ContentPresenter Content="{TemplateBinding Content}"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Foreground" Value="White"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="0.1*"/>
+        </Grid.RowDefinitions>
+        <DataGrid Grid.Row="0"
+                  AutoGenerateColumns="False"
+                  IsReadOnly="True"
+                  x:Name="GridComments">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Игра" Width="auto" Binding="{Binding Games.Name}"/>
+                <DataGridTemplateColumn Header="Юзер">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal"
+                                        x:Name="FIOStackPanel">
+                                <Label Content="{Binding Users.Familiya}" Width="auto" x:Name="Familiya"/>
+                                <Label Content="{Binding Users.Otchestvo}" Width="auto"/>
+                                <Label Content="{Binding Users.Name}" Width="auto"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Дата коментария" Width="auto" Binding="{Binding Date_comment, StringFormat={}{0:dd.MM.yyyy}}"/>
+                <DataGridTemplateColumn Header="Коментарий" Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBox Text="{Binding Comment_text}" TextWrapping="Wrap"  IsReadOnly="True"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Рейтинг" Width="auto" Binding="{Binding Rating_Values.id_Rating, StringFormat='звёзд {0}'}" MinWidth="100"/>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Редактировать" x:Name="BtnEditComment" Click="BtnEditComment_Click" Height="auto" Width="auto"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Grid.Row="1"
+                        Orientation="Horizontal">
+            <Button Content="Удалить" x:Name="BtnRemoveComents" Click="BtnRemoveComents_Click" Width="auto" Height="auto"/>
+            <Button Margin="10 0 0 0" Content="Добавить" x:Name="BtnAddComent" Click="BtnAddComent_Click" Width="auto" Height="auto"/>
+        </StackPanel>
+    </Grid>
+</Page>
